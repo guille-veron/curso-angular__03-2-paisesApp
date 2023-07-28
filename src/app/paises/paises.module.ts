@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PaisTablaComponent } from './components/pais-tabla/pais-tabla.component';
 import { PaisInputComponent } from './components/pais-input/pais-input.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -29,7 +30,8 @@ import { PaisInputComponent } from './components/pais-input/pais-input.component
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ]
 })
 export class PaisesModule { }

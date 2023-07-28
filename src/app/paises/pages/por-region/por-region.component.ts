@@ -1,6 +1,9 @@
 import { Component} from '@angular/core';
 import { Pais } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
+import { Region } from '../../interfaces/region.type';
+
+
 
 @Component({
   selector: 'app-por-region',
@@ -13,16 +16,22 @@ import { PaisService } from '../../services/pais.service';
 })
 export class PorRegionComponent{
 
-  regiones :string[] = [ 'africa', 'americas', 'asia', 'europe', 'oceania'];
-  regionActiva: string = '';  
+  regiones :Region[] = [ 'africa', 'americas', 'asia', 'europe', 'oceania'];
+  regionActiva?: Region;  
   
   paises: Pais[] = [];
 
   constructor(private paisService:PaisService) { }
 
-  activarRegion(region:string){
+  ngOnInit(): void {
+    this.paises = this.paisService.cacheStore.byRegion.paises;    
+    this.regionActiva = this.paisService.cacheStore.byRegion.region;
+  }
+
+  activarRegion(region:Region){
     if(region === this.regionActiva){return;}
     this.regionActiva = region;
+    this.paisService.cacheStore.byRegion.region = region;
     this.paises = [];
     this.paisService.buscarPaisPorRegion(region)
       .subscribe((paises) => {        

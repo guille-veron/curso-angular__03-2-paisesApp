@@ -3,8 +3,9 @@
     <hr>
     <div class="row">
         <div class="col">
-            <app-pais-input (onEnter)="buscar($event)"
-                            (onDebounce)="sugerencias($event)">
+            <app-pais-input (onDebounce)="buscar($event)"
+                            [initialValue] = "termino"
+                            placeholder="Buscar Capital...">
             </app-pais-input>
         </div>
     </div>
@@ -13,9 +14,11 @@
         No se encontró el término {{termino}}
     </div>
 
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
     <div class="row" *ngIf="paises.length > 0">
         <div class="col">
             <app-pais-tabla [paises]="paises"></app-pais-tabla>
         </div>
-    </div>
+    </div>    
 </div>
